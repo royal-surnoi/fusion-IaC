@@ -2,7 +2,13 @@ resource "aws_instance" "development-instance" {
   ami = var.AMI_id
   instance_type =  var.instance_type
   vpc_security_group_ids = [aws_security_group.dev-stage-sg.id]
-  
+  user_data = <<EOF
+    #!/bin/bash
+    sudo yum update -y
+    sudo yum install -y docker
+    sudo service docker start
+    sudo usermod -a -G docker ec2-user
+  EOF
   tags = var.tags
 }
 
