@@ -8,20 +8,20 @@ resource "aws_instance" "development-instance" {
 resource "aws_security_group" "dev-stage-sg" {
     name        = "allow_tls"
     description = "Allow SSH,HTTP,80 and 8080 inbound traffic and all outbound traffic"
-    vpc_id      = aws_vpc.main.id
+    # vpc_id      = aws_vpc.main.id
     tags = var.tags
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh_ipv4" {
   security_group_id = aws_security_group.allow_tls.id
-  cidr_ipv4         = aws_vpc.main.cidr_block
+#   cidr_ipv4         = aws_vpc.main.cidr_block
   from_port         = 443
   ip_protocol       = "tcp"
   to_port           = 443
 }
 resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv4" {
   security_group_id = aws_security_group.allow_tls.id
-  cidr_ipv4         = aws_vpc.main.cidr_block
+#   cidr_ipv4         = aws_vpc.main.cidr_block
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
@@ -29,7 +29,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv4" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_8080_ipv4" {
   security_group_id = aws_security_group.allow_tls.id
-  cidr_ipv4         = aws_vpc.main.cidr_block
+#   cidr_ipv4         = aws_vpc.main.cidr_block
   from_port         = 8080
   ip_protocol       = "tcp"
   to_port           = 8080
