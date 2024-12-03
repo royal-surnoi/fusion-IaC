@@ -12,11 +12,15 @@ variable "tags" {
     type = map
     default = {
         Name = "DevelopmentServer"
-        Application = "fusion-iq"
+        Application = "FusionIQ"
         Envronment  = "Development"
         Owner       = "DevOpsTeam"
         CostCenter  = "DevOpsTeam"
-        Component   = "frontend-backend"
     }
+}
+
+variable "cidr_blocks" {
+    type = list(string)
+    default = [ "0.0.0.0/0" ]
   
 }
