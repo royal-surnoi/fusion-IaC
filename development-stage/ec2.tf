@@ -6,7 +6,7 @@ resource "aws_instance" "development-instance" {
 }
 
 resource "aws_security_group" "dev-stage-sg" {
-    name        = "allow_tls"
+    name        = "DevelopmentServer-sg"
     description = "Allow SSH,HTTP,80 and 8080 inbound traffic and all outbound traffic"
     # vpc_id      = aws_vpc.main.id
     tags = var.tags
