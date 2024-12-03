@@ -29,10 +29,12 @@ resource "aws_security_group" "dev-stage-sg" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_8080_ipv4" {
   security_group_id = aws_security_group.dev-stage-sg.id
-  description       = [for description in var.ingress_rule.description ]
-  cidr_ipv4         = [for cidr_ipv4 in var.ingress_rule.from_port ]
-  ip_protocol       = [for ip_protocol in var.ingress_rule.ip_protocol ]
-  to_port           = [for to_port in var.ingress_rule.to_port ]
+  for_each = var.ingress_rule
+  description       = each.value.description
+  cidr_ipv4         = each.value.cidr_ipv4
+  from_port         = each.value.from_port
+  ip_protocol       = each.value.ip_protocol
+  to_port           = each.value.to_port
 }
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   security_group_id = aws_security_group.dev-stage-sg.id
