@@ -20,7 +20,31 @@ variable "tags" {
 }
 
 variable "cidr_blocks" {
-    type = list(string)
-    default = [ "0.0.0.0/0" ]
+    type = string
+    default = "0.0.0.0/0"
   
+}
+
+variable "ingress_rule" {
+  default = [{
+    description = "access to all inbound"
+    from_port = 22
+    to_port = 22
+    ip_protocol = "tcp"
+    cidr_blocks = "0.0.0.0/0"
+  },
+  {
+    description = "access to all inbound"
+    from_port = 8080
+    to_port = 8080
+    ip_protocol = "tcp"
+    cidr_blocks = "0.0.0.0/0"
+  }
+  ,{
+    description = "access to all inbound"
+    from_port = 80
+    to_port = 80
+    ip_protocol = "all"
+    cidr_blocks = "0.0.0.0/0"
+  }]
 }
