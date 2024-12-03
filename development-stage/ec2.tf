@@ -3,13 +3,7 @@ resource "aws_instance" "development-instance" {
   instance_type =  var.instance_type
   vpc_security_group_ids = [aws_security_group.dev-stage-sg.id]
   key_name = aws_key_pair.deployer.key_name
-  user_data = <<EOF
-    #!/bin/bash
-    sudo yum update -y
-    sudo yum install -y docker
-    sudo service docker start
-    sudo usermod -a -G docker ec2-user
-  EOF
+  user_data = "${file("docker_config.sh")}"
   tags = var.tags
 }
 
