@@ -29,7 +29,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv4" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_8080_ipv4" {
   security_group_id = aws_security_group.dev-stage-sg.id
-  cidr_ipv4         = var.ingress_rule.cidr_blocks
+  cidr_ipv4         = var.cidr_blocks
   from_port         = 8080
   ip_protocol       = "tcp"
   to_port           = 8080
