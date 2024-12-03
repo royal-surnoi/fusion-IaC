@@ -2,6 +2,7 @@ resource "aws_instance" "development-instance" {
   ami = var.AMI_id
   instance_type =  var.instance_type
   vpc_security_group_ids = [aws_security_group.dev-stage-sg.id]
+  key_name = aws_key_pair.deployer
   user_data = <<EOF
     #!/bin/bash
     sudo yum update -y
@@ -10,6 +11,13 @@ resource "aws_instance" "development-instance" {
     sudo usermod -a -G docker ec2-user
   EOF
   tags = var.tags
+}
+
+
+resource "aws_key_pair" "deployer" {
+  key_name   = "Royal_Emp_1158"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9k7YLrxoLFcqCv+V/4ACpAy84gwOrBp2yqBOOuSGVBNl05TvCY7CkfpcmCVJdmenj6RUe5oSiQFATuhvqEnJsRkLIS/+Mf0t5KgUo+WjBpcLwDTyShsujA59qE4VbLMmXdAnCqnYnKT79KIndFafaGpnuxoep1JK07TatC1sm5ccPmgsIpAIOf0OxeWBfsodBX24qoQWh2oxDgEJX5ixPRNKBqgBkLNjp2vkt4ZlE1tNap28w8AdvHc9EIxVeWyoMohdL5yJyH4c7D9LYyYwml3t7PPWZSoL/9kdPadvqyywcEjtfE9VDfd+i9BadVtzj2v3dH+RJeiMOeIhhASxt Royal_Emp_1158"
+
 }
 
 resource "aws_security_group" "dev-stage-sg" {
