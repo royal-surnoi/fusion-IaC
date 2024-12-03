@@ -1,7 +1,5 @@
 resource "aws_instance" "development-instance" {
-  ami = "ami-0453ec754f44f9a4a"
+  ami = var.AMI_id
   instance_type =  "t2.micro"
-  tags = {
-    Name = "dev-deploy"
-  }
+  tags = var.tags
 }
