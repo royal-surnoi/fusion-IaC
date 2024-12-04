@@ -47,3 +47,15 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   cidr_ipv4         = var.cidr_blocks
   ip_protocol       = "-1" # semantically equivalent to all ports
 }
+
+resource "aws_route53_zone" "dev" {
+  name = "royalreddy.co.in"
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "dev.royalreddy.co.in"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.development-instance.public_ip]
+}
