@@ -54,7 +54,7 @@ resource "aws_route53_zone" "dev" {
 
 resource "aws_route53_record" "www" {
   zone_id = aws_route53_zone.dev.zone_id
-  name    = "dev.royalreddy.co.in"
+  name    = "royalreddy.co.in"
   type    = "A"
   ttl     = 300
   records = [aws_instance.development-instance.public_ip]
