@@ -15,7 +15,7 @@ resource "aws_key_pair" "deployer" {
 }
 
 resource "aws_security_group" "dev-stage-sg" {
-    name        = "DevelopmentServer-sg"
+    name        = "DevelopmentBackend-sg"
     description = "Allow SSH,HTTP,80 and 8080 inbound traffic and all outbound traffic"
     tags = var.tags
 }
@@ -62,7 +62,7 @@ resource "aws_route53_zone" "dev" {
 
 resource "aws_route53_record" "www" {
   zone_id = aws_route53_zone.dev.zone_id
-  name    = "dev.royalreddy.co.in"
+  name    = "be.royalreddy.co.in"
   type    = "A"
   ttl     = 300
   records = [aws_instance.development-instance.public_ip]
